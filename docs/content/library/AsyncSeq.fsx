@@ -251,8 +251,25 @@ it is usually consumed using an operator such as `AsyncSeq.iterAsync` as shown a
 `('a -> Async<unit>) -> AsyncSeq<'a> -> Async<unit>` where the first argument is a function `'a -> Async<unit>` which performs 
 some work on an item of the sequence and is applied repeatedly to subsequent items. In a sense, `iterAsync` *pushes* values to this 
 function. The primary difference from observers of observable sequences is the return type `Async<unit>` rather than simply `unit`.
+
+### IAsyncEnumerable (.NET Core 3.0)
+
+With the addition of .NET Core 3.0, it is now possible to easily convert between an `AsyncSeq<'a>` and `IAsyncEnumerable<'a>`. 
+This allows for smoother interoperation with C#. 
+First generate an `AsyncSeq<'a>` using the asyncSeq computation builder, then use the `AsyncSeq.toAsyncEnum` and `AsyncSeq.ofAsyncEnum` functions to convert between the two types.
 *)
 
+// From AsyncSeq to C# AsyncEnumerable
+let asyncToConvertToCSharp = 
+    asyncSeq {
+        for i = 0 to 5 do
+            do! Async.Sleep 1000
+            yield i
+    } 
+    |> AsyncSeq.toAsyncEnum
+
+// From C# AsyncEnumerable back to F# AsyncSeq
+let asyncSeq = asyncToConvertToCSharp |> AsyncSeq.ofAsyncEnum
 
 (**
 ### Performance Considerations
