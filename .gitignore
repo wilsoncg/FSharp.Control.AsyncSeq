@@ -195,3 +195,5 @@ xunit*.html
 
 # exclude artifacts folder
 artifacts/
+.fake
+.ionide
