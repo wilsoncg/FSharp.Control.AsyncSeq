@@ -1,3 +1,4 @@
+version 5.245.1
 source https://api.nuget.org/v3/index.json
 framework: netstandard2.0
 redirects: on
@@ -14,12 +15,30 @@ group Legacy
 
 group Build
     source https://api.nuget.org/v3/index.json
-    framework: net45
 
-    nuget FAKE ~> 4
+    nuget Fake.Api.GitHub
+    nuget Fake.BuildServer.AppVeyor
+    nuget Fake.Core.Environment
+    nuget Fake.Core.Process
+    nuget Fake.Core.ReleaseNotes //
+    nuget Fake.Core.String
+    nuget Fake.Core.Target //
+    nuget Fake.Core.Trace
+    nuget Fake.DotNet.AssemblyInfoFile
+    nuget Fake.DotNet.Cli
+    nuget Fake.DotNet.Fsc
+    nuget Fake.DotNet.FSFormatting
+    nuget Fake.DotNet.Fsi
+    nuget Fake.DotNet.MSBuild
+    nuget Fake.DotNet.Paket
+    nuget Fake.IO.FileSystem
+    nuget Fake.Tools.Git
+    nuget Fake.Tools.GitVersion
     nuget FSharp.Formatting
     nuget Nuget.CommandLine
-    github fsharp/FAKE modules/Octokit/Octokit.fsx
+    nuget Octokit //
+    nuget Paket >= 5.245.1 lowest_matching: true
+    nuget Paket.Core >= 5.245.1 lowest_matching: true
 
 group Test
     source https://api.nuget.org/v3/index.json
